@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import androidx.appcompat.widget.Toolbar;
 
 import com.e.pulsa.R;
 
@@ -17,6 +18,7 @@ public class ChooseProvider extends AppCompatActivity {
     RelativeLayout rlTelkomsel;
     RelativeLayout rlTheree;
 
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,8 @@ public class ChooseProvider extends AppCompatActivity {
     }
 
     void init() {
+
+        toolbar = findViewById(R.id.toolbar);
 
         rlIndosat = findViewById(R.id.rlIndosat);
         rlTelkomsel = findViewById(R.id.rlTelkomsel);
