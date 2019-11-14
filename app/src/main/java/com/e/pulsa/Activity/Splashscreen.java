@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.e.pulsa.Login;
 import com.e.pulsa.MainActivity;
 import com.e.pulsa.R;
 
@@ -21,7 +22,7 @@ public class Splashscreen extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent home=new Intent(Splashscreen.this, MainActivity.class);
+                Intent home=new Intent(Splashscreen.this, Login.class);
                 startActivity(home);
                 finish();
 

@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.PDAM.InputPdam"/>
+        <activity android:name=".Activity.Register"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Activity.PDAM.InputPdam" />
         <activity android:name=".Activity.Listrik.InputTagihanListrik" />
         <activity android:name=".Activity.Listrik.InputTokenListrik" />
         <activity android:name=".Activity.Listrik.MenuListrik" />

@@ -4,29 +4,31 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#99ccff"
+    android:background="#ff6666"
     android:gravity="center"
     tools:context=".MainActivity">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/logo"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_tiitle_splashscreen"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+
     <ImageView
 
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/logo"
-        android:src="@drawable/ic_pulsa"
+        android:src="@drawable/ic_splashscreen"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
 
-
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="50"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/white"
+        style="@style/AppTheme.WhiteAccent"/>
 
 </RelativeLayout>

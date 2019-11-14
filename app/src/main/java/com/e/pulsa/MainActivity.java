@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.e.pulsa.Activity.Listrik.MenuListrik;
 import com.e.pulsa.Activity.PDAM.InputPdam;
@@ -15,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    LinearLayout llPulsa;
-    LinearLayout llListrik;
-    LinearLayout llpdam;
+    RelativeLayout llPulsa;
+    RelativeLayout llListrik;
+    RelativeLayout llpdam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     void initialaze(){
 
-        llPulsa = findViewById(R.id.ll_pulsa);
-        llListrik = findViewById(R.id.llListrik);
-        llpdam = findViewById(R.id.llPdam);
+        llPulsa = findViewById(R.id.rlPulsa);
+        llListrik = findViewById(R.id.rlPln);
+        llpdam = findViewById(R.id.rlPDAM);
 
     }
 
