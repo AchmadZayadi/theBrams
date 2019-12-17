@@ -1,13 +1,10 @@
 package com.example.mycollegeapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.example.mycollegeapp.Activity.Listrik.MenuListrik;
 import com.example.mycollegeapp.Activity.PDAM.InputPdam;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         llPulsa = findViewById(R.id.rlPulsa);
         llListrik = findViewById(R.id.rlPln);
         llpdam = findViewById(R.id.rlPDAM);
-
+        ///spadaaaaaa
     }
     void onClick(){
         llPulsa.setOnClickListener(new View.OnClickListener() {

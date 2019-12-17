@@ -14,8 +14,8 @@ import com.example.mycollegeapp.Activity.Register;
 
 
 public class Login extends AppCompatActivity {
-
-    String Phone = "087885010608";
+// spaadadadadaadada
+    String Phone = "08996380260";
     String password = "123456";
     EditText etPhone;
     EditText etPassword;
