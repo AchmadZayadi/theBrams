@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">E-wallet</string>
+    <string name="masuk">Masuk</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="nomor_handphone">Nomor Handphone</string>
+    <string name="register">Register</string>
+    <string name="warning_login">Lengkapi data Anda!!</string>
+    <string name="warning_login2">Data Anda Salah , Silahkan periksa kembali</string>
+</resources>

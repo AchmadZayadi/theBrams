@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.mycollegeapp">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activity.Register"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Activity.PDAM.InputPdam" />
+        <activity android:name=".Activity.Listrik.InputTagihanListrik" />
+        <activity android:name=".Activity.Listrik.InputTokenListrik" />
+        <activity android:name=".Activity.Listrik.MenuListrik" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity.Pulsa.InputPulsa" />
+        <activity android:name=".Activity.Pulsa.ChooseProvider" />
+        <activity android:name=".Activity.Splashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
