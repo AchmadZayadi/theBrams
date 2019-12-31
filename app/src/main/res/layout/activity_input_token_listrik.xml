@@ -1,85 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgColor"
     tools:context=".Activity.Listrik.InputTokenListrik">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ivBackToolbar"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20sp"
+            android:layout_toEndOf="@id/ivBackToolbar"
+            android:text="Token Listrik"
+            android:textColor="@color/hitam"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/dropshadow" />
 
     <TextView
         android:id="@+id/tvTillte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:layout_below="@id/line"
+        android:padding="10dp"
         android:text="Masukan Nomor Meteran / ID Pelanggan Anda dengan benar"
-        android:textColor="@color/hitam"
-        android:layout_margin="10dp"/>
+        android:textColor="#707070"
+        android:textSize="16sp" />
+
     <LinearLayout
-        android:layout_below="@id/tvTillte"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvTillte"
         android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No. Meter/ID Pel"
-            android:textSize="14sp"
-            android:textColor="@color/hitam"/>
+            android:textColor="@color/hitam"
+            android:textSize="14sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/etIdPelanggan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contoh 112233445566"/>
+
+            <EditText
+                android:id="@+id/etIdPelanggan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contoh 112233445566" />
+
             <ImageView
                 android:layout_width="30sp"
                 android:layout_height="30sp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_listrik"/>
+                android:src="@drawable/ic_listrik" />
         </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/hitam"
-            android:textSize="14sp"
             android:layout_marginTop="10dp"
-            android:text="Nominal"/>
+            android:text="Nominal"
+            android:textColor="@color/hitam"
+            android:textSize="14sp" />
 
-        <Spinner
-            android:id="@+id/spNominal"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/etNominal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="10.000" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/iv_down"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="30sp"
-            android:background="@drawable/bg_keterangan">
+            android:background="@drawable/bg_keterangan"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Keterangan"
-                android:textSize="14sp"
-                android:textColor="@color/hitam"/>
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Informasi kode token yang Anda Bayar akan dikirimkan maksimall 2x24 jam."
-                android:textSize="14sp"
-                android:textColor="@color/hitam"/>
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -111,19 +157,19 @@
             android:id="@+id/btnPost"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#2db300"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="30sp"
-            android:layout_alignParentBottom="true">
+            android:background="#2db300">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:gravity="center"
                 android:text="LANJUT"
-                android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:layout_centerInParent="true"/>
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </LinearLayout>

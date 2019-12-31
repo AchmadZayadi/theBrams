@@ -4,10 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgColor"
     tools:context=".Activity.Listrik.MenuListrik">
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
+        <ImageView
+            android:id="@+id/ivBackToolbar"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20sp"
+            android:layout_toEndOf="@id/ivBackToolbar"
+            android:text="Listrik"
+            android:textColor="@color/hitam"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/dropshadow" />
     <LinearLayout
+        android:layout_below="@id/line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -17,14 +47,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
             android:text="Beli Token atau Bayar Tagihan Listrik"
-            android:textColor="@color/hitam"
+            android:textColor="#707070"
             android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/hitam"
-            android:layout_marginTop="50dp"/>
+            android:background="#707070" />
 
         <RelativeLayout
             android:id="@+id/rlTokenListrik"
@@ -51,7 +80,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/hitam" />
+            android:background="#707070" />
 
         <RelativeLayout
             android:id="@+id/rlTagihanListik"
@@ -78,7 +107,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/hitam" />
+            android:background="#707070" />
 
     </LinearLayout>
 

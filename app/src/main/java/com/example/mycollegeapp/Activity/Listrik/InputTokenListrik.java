@@ -11,13 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.mycollegeapp.R;
 
 public class InputTokenListrik extends AppCompatActivity {
-    Spinner spinner;
-    String [] NominalPulsa = {
-            "10.000",
-            "25.000",
-            "50.000",
-            "100.000"
-    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,23 +21,6 @@ public class InputTokenListrik extends AppCompatActivity {
     }
 
     void init(){
-
-        spinner = findViewById(R.id.spNominal);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, NominalPulsa);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
     }
