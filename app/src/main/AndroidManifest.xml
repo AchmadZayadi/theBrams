@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mycollegeapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.Register"></activity>
+        <activity android:name=".Register"></activity>
         <activity android:name=".Login" />
         <activity android:name=".Activity.PDAM.InputPdam" />
         <activity android:name=".Activity.Listrik.InputTagihanListrik" />
