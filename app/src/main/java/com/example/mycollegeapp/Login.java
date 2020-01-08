@@ -202,7 +202,8 @@ public class Login extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+        AppController appController = new AppController();
+        appController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
 
     private void showDialog() {

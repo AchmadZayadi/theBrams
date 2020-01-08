@@ -123,7 +123,7 @@
                    android:layout_height="wrap_content"/>
 
                <ImageView
-                   android:id="@+id/history"
+                   android:id="@+id/rlhistory"
                    android:layout_marginLeft="50dp"
                    android:layout_toEndOf="@id/send2"
                    android:src="@drawable/history"

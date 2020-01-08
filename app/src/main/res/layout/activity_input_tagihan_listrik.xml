@@ -1,42 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activity.Listrik.InputTokenListrik">
-    <RelativeLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
 
-        <ImageView
-            android:id="@+id/ivBackToolbar"
-            android:layout_width="15dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="20sp"
-            android:layout_toEndOf="@id/ivBackToolbar"
-            android:text="Listrik"
-            android:textColor="@color/hitam"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
-
-    <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_below="@+id/toolbar"
-        android:background="@drawable/dropshadow" />
     <TextView
-        android:layout_below="@id/line"
         android:id="@+id/tvTillte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,6 +47,41 @@
                 android:src="@drawable/ic_listrik" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etnama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bram"
+                android:hint="Bram" />
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_listrik" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etalamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="100000000"
+                android:hint="Bram" />
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_listrik" />
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,25 +108,20 @@
         </LinearLayout>
 
 
-        <RelativeLayout
-            android:id="@+id/btnPost"
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_weight="0.5"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="30sp"
-            android:background="#2db300">
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="Submit"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="LANJUT"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"/>
     </LinearLayout>
 
 </RelativeLayout>
