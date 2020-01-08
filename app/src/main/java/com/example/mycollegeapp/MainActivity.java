@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView llPulsa;
     ImageView llListrik;
     ImageView llpdam;
+    ImageView llhistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         llPulsa = findViewById(R.id.rlPulsa);
         llListrik = findViewById(R.id.rlPln);
         llpdam = findViewById(R.id.rlPDAM);
+        llhistory = findViewById(R.id.rlhistory);
         ///spadaaaaaa
     }
     void onClick(){
