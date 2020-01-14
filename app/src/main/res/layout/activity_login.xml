@@ -49,7 +49,7 @@
                     android:drawablePadding="10dp"
                     android:textColorHint="@color/hitam"
                     android:hint="@string/nomor_handphone"
-                    android:inputType="phone" />
+                    android:inputType="text" />
 
 
                 <EditText

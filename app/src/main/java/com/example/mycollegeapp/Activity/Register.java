@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.example.mycollegeapp.R;
 
-import retrofit2.Retrofit;
+
 
 public class Register extends AppCompatActivity {
 
