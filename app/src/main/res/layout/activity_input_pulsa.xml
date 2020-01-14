@@ -1,97 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgColor"
+    android:background="@color/white"
     tools:context=".Activity.Pulsa.InputPulsa">
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+        tools:ignore="MissingConstraints">
 
-        <TextView
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:layout_marginTop="100dp"
-            android:text="Pastikan nomor sudah benar dan pilihlah jumlah pulsa yang kamu inginkan."
-            android:textSize="16sp"
-            android:textStyle="normal" />
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarTheme"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/ToolbarTheme"/>
 
-        <EditText
-            android:id="@+id/etPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nomor Handphone" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20sp"
-            android:layout_marginBottom="10dp"
-            android:text="Jumlah top up"
-            android:textColor="#595959"
-            android:textSize="16sp" />
-
-
-        <Spinner
-            android:id="@+id/spNominal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
 
         <View
+            android:id="@+id/line"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/hitam" />
-
-        <RelativeLayout
+            android:layout_height="3dp"
+            android:layout_below="@+id/toolbar"
+            android:background="@drawable/dropshadow" />
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_below="@id/line"
+            android:orientation="vertical"
+            android:padding="30dp"
+            tools:ignore="MissingConstraints">
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Saldo Anda"
-                android:textSize="14sp" />
+                android:layout_marginBottom="20sp"
+                android:text="Pastikan nomor sudah benar dan pilihlah jumlah pulsa yang kamu inginkan."
+                android:textColor="@color/semi_black"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nomor_handphone"
+                    android:inputType="number"
+                    android:textColor="@color/semi_black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/ivClearPhone"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/iv_close"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20sp"
+                android:text="@string/jumlah_top_up"
+                android:textColor="@color/semi_black"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/etPulsa"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="10.000"
+                    android:textColor="@color/semi_black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/iv_down" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlTotalPulsa"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Rp . 10.000.000"
-                android:textColor="@color/hitam"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:visibility="gone">
 
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Harga"
+                    android:textSize="14sp" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tvTotalPulsa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Rp . 10.000.000"
+                    android:textColor="@color/hitam"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-    <RelativeLayout
-        android:id="@+id/btnPost"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#2db300"
-        android:layout_margin="10dp"
-        android:layout_alignParentBottom="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="LANJUT"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saldo Anda"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Rp . 10.000.000"
+                    android:textColor="@color/hitam"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/btnPost"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round_btn_bayar">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/bayar"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
 
     </RelativeLayout>
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/bgColor"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".Activity.Pulsa.ChooseProvider">
 
@@ -12,14 +12,17 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:titleTextColor="@android:color/white" />
+        android:theme="@style/ToolbarTheme"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ToolbarTheme"/>
+
 
     <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/hitam" />
+        android:layout_height="3dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/dropshadow" />
 
     <RelativeLayout
         android:id="@+id/rlIndosat"
@@ -35,12 +38,19 @@
             android:textColor="#000000"
             android:textSize="16sp" />
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/iv_indosat"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"/>
+
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/hitam" />
+        android:background="#707070" />
 
     <RelativeLayout
         android:id="@+id/rlTelkomsel"
@@ -55,13 +65,18 @@
             android:text="TELKOMSEL"
             android:textColor="#000000"
             android:textSize="16sp" />
-
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/iv_telkomsel"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/hitam" />
+        android:background="#707070" />
 
     <RelativeLayout
         android:id="@+id/rlXl"
@@ -76,13 +91,18 @@
             android:text="XL"
             android:textColor="#000000"
             android:textSize="16sp" />
-
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_xl"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/hitam" />
+        android:background="#707070" />
 
     <RelativeLayout
         android:id="@+id/rlTheree"
@@ -97,11 +117,16 @@
             android:text="3"
             android:textColor="#000000"
             android:textSize="16sp" />
-
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/iv_tree"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/hitam" />
+        android:background="#707070" />
 </LinearLayout>

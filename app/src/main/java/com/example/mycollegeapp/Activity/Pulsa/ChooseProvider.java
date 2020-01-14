@@ -29,6 +29,8 @@ public class ChooseProvider extends AppCompatActivity {
     void init() {
 
         toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         rlIndosat = findViewById(R.id.rlIndosat);
         rlTelkomsel = findViewById(R.id.rlTelkomsel);
