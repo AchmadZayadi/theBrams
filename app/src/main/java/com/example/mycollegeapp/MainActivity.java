@@ -19,10 +19,12 @@ public class MainActivity extends AppCompatActivity {
     Button btn_logout;
     TextView txt_id, txt_username;
     String id, username;
+    String saldo;
     SharedPreferences sharedpreferences;
 
     public static final String TAG_ID = "id";
     public static final String TAG_USERNAME = "username";
+    public static final String TAG_SALDO = "saldo";
 
     ImageView llPulsa;
     ImageView llListrik;
@@ -40,9 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         id = getIntent().getStringExtra(TAG_ID);
         username = getIntent().getStringExtra(TAG_USERNAME);
+        saldo = getIntent().getStringExtra(TAG_SALDO);
 
-        txt_id.setText("ID : " + id);
-        txt_username.setText("USERNAME : " + username);
+        txt_id.setText(username);
+        txt_username.setText(" Rp : " + saldo);
 
         initialaze();
         onClick();
