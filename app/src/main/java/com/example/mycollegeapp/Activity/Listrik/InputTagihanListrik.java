@@ -1,102 +1,189 @@
 package com.example.mycollegeapp.Activity.Listrik;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mycollegeapp.Activity.helper.DbHelper;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.mycollegeapp.Activity.AppController;
 import com.example.mycollegeapp.MainActivity;
 import com.example.mycollegeapp.R;
+import com.example.mycollegeapp.Register;
+import com.example.mycollegeapp.Server;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class InputTagihanListrik extends AppCompatActivity {
-
-    EditText txt_id,txt_address,txt_name;
+    ProgressDialog pDialog;
+    EditText txt_id,txt_harga ,txt_name;
     Button btn_submit, btn_cancel;
-    DbHelper SQLite = new DbHelper(this);
-    String id, name, address;
+    Intent intent;
 
+    int success;
+    ConnectivityManager conMgr;
+
+    private String url = Server.URL + "input_listrik.php";
+
+    private static final String TAG = Register.class.getSimpleName();
+
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
+
+    String tag_json_obj = "json_obj_req";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_tagihan_listrik);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        txt_id = (EditText) findViewById(R.id.etIdPelanggan);
-        txt_name = (EditText) findViewById(R.id.etnama);
-        txt_address = (EditText) findViewById(R.id.etalamat);
-        btn_submit = (Button) findViewById(R.id.btn_submit);
-        btn_cancel = (Button) findViewById(R.id.btn_cancel);
-
-        id = getIntent().getStringExtra(MainActivity.TAG_ID);
-
-        if (id == null || id == "") {
-            setTitle("Add Data");
-        } else {
-            setTitle("Edit Data");
-            txt_id.setText(id);
+        conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        {
+            if (conMgr.getActiveNetworkInfo() != null
+                    && conMgr.getActiveNetworkInfo().isAvailable()
+                    && conMgr.getActiveNetworkInfo().isConnected()) {
+            } else {
+                Toast.makeText(getApplicationContext(), "No Internet Connection",
+                        Toast.LENGTH_LONG).show();
+            }
         }
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
+        btn_cancel = (Button) findViewById(R.id.btn_cancel);
+        btn_submit = (Button) findViewById(R.id.btn_submit);
+        txt_id = (EditText) findViewById(R.id.etIdPelanggan);
+        txt_name = (EditText) findViewById(R.id.etnama_pel);
+        txt_harga = (EditText) findViewById(R.id.etharga);
+
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                try {
-                    if (txt_id.getText().toString().equals("")) {
-                        save();
-                    }
-                } catch (Exception e){
-                    Log.e("Submit", e.toString());
+
+                intent = new Intent(InputTagihanListrik.this, MainActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String id_pel = txt_id.getText().toString();
+                String nama_pel = txt_name.getText().toString();
+                String tagihan = txt_harga.getText().toString();
+
+
+                if (conMgr.getActiveNetworkInfo() != null
+                        && conMgr.getActiveNetworkInfo().isAvailable()
+                        && conMgr.getActiveNetworkInfo().isConnected()) {
+                    checkRegister(id_pel, nama_pel, tagihan);
+                } else {
+                    Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                blank();
-                finish();
-            }
-        });
     }
+
+    private void checkRegister(final String id_pel, final String nama_pel, final String tagihan) {
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Membayar ...");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.e(TAG, "Transaksi Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    success = jObj.getInt(TAG_SUCCESS);
+
+                    // Check for error node in json
+                    if (success == 1) {
+
+                        Log.e("Successfully!", jObj.toString());
+
+                        Toast.makeText(getApplicationContext(),
+                                jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+
+
+                        txt_harga.setText("");
+
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
+
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Transaksi Gagal: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+
+                hideDialog();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_pel", id_pel);
+                params.put("nama_pel", nama_pel);
+                params.put("tagihan", tagihan);
+
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
     @Override
     public void onBackPressed() {
+        intent = new Intent(InputTagihanListrik.this, MainActivity.class);
         finish();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                blank();
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    // Make blank all Edit Text
-    private void blank() {
-        txt_name.requestFocus();
-        txt_id.setText(null);
-        txt_name.setText(null);
-        txt_address.setText(null);
-    }
-
-    // Save data to SQLite database
-    private void save() {
-        if (String.valueOf(txt_name.getText()).equals(null) || String.valueOf(txt_name.getText()).equals("") ||
-                String.valueOf(txt_address.getText()).equals(null) || String.valueOf(txt_address.getText()).equals("")) {
-            Toast.makeText(getApplicationContext(),
-                    "Please input name or address ...", Toast.LENGTH_SHORT).show();
-        } else {
-            SQLite.insert(txt_name.getText().toString().trim(), txt_address.getText().toString().trim());
-            blank();
-            finish();
-        }
+        startActivity(intent);
     }
 }
