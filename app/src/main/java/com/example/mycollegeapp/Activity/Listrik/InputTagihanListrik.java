@@ -3,6 +3,7 @@ package com.example.mycollegeapp.Activity.Listrik;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mycollegeapp.Activity.AppController;
+import com.example.mycollegeapp.Login;
 import com.example.mycollegeapp.MainActivity;
 import com.example.mycollegeapp.R;
-import com.example.mycollegeapp.Register;
 import com.example.mycollegeapp.Server;
 
 import org.json.JSONException;
@@ -29,17 +30,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InputTagihanListrik extends AppCompatActivity {
+
+    public static final String TAG_ID = "id";
+    public static final String TAG_USERNAME = "username";
+    String id, username;
     ProgressDialog pDialog;
     EditText txt_id,txt_harga ,txt_name;
     Button btn_submit, btn_cancel;
     Intent intent;
+    SharedPreferences sharedpreferences;
 
     int success;
     ConnectivityManager conMgr;
 
     private String url = Server.URL + "input_listrik.php";
 
-    private static final String TAG = Register.class.getSimpleName();
+    private static final String TAG = InputTagihanListrik.class.getSimpleName();
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
@@ -49,7 +55,16 @@ public class InputTagihanListrik extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_tagihan_listrik);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+
+        id = getIntent().getStringExtra(TAG_ID);
+        username = getIntent().getStringExtra(TAG_USERNAME);
+
+
+        txt_id.setText(id);
+        txt_name.setText(username);
 
         conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         {
@@ -92,7 +107,7 @@ public class InputTagihanListrik extends AppCompatActivity {
                 if (conMgr.getActiveNetworkInfo() != null
                         && conMgr.getActiveNetworkInfo().isAvailable()
                         && conMgr.getActiveNetworkInfo().isConnected()) {
-                    checkRegister(id_pel, nama_pel, tagihan);
+                    checkinput(id_pel, nama_pel, tagihan);
                 } else {
                     Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                 }
@@ -100,7 +115,7 @@ public class InputTagihanListrik extends AppCompatActivity {
         });
     }
 
-    private void checkRegister(final String id_pel, final String nama_pel, final String tagihan) {
+    private void checkinput(final String id_pel, final String nama_pel, final String tagihan) {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Membayar ...");
