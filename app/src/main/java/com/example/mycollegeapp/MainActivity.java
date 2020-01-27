@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
 
     public static final String TAG_ID = "id";
-    public static final String TAG_USERNAME = "username";
     public static final String TAG_NAMA = "nama";
     public static final String TAG_SALDO = "saldo";
 
