@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activity.Listrik.InputTokenListrik">
+    tools:context=".Activity.Listrik.InputTagihanListrik">
 
     <TextView
         android:id="@+id/tvTillte"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/etIdPelanggan"
+                android:id="@+id/id_pel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contoh 112233445566" />
@@ -52,11 +52,10 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/etnama"
+                android:id="@+id/etnama_pel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bram"
-                android:hint="Bram" />
+                 />
 
             <ImageView
                 android:layout_width="30sp"
@@ -69,11 +68,9 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/etalamat"
+                android:id="@+id/etharga"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="100000000"
-                android:hint="Bram" />
+                android:layout_height="wrap_content"/>
 
             <ImageView
                 android:layout_width="30sp"
@@ -110,6 +107,7 @@
 
         <Button
             android:id="@+id/btn_submit"
+            android:layout_marginTop="30dp"
             android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,6 +117,7 @@
         <Button
             android:id="@+id/btn_cancel"
             android:layout_weight="0.5"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancel"/>

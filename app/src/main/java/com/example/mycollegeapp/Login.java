@@ -45,12 +45,13 @@ public class Login extends AppCompatActivity {
     public final static String TAG_USERNAME = "username";
     public final static String TAG_ID = "id";
     public final static String TAG_SALDO = "saldo";
+    public final static String TAG_NAMA = "nama";
 
     String tag_json_obj = "json_obj_req";
 
     SharedPreferences sharedpreferences;
     Boolean session = false;
-    String id, username, saldo;
+    String id, username, saldo, nama;
     public static final String my_shared_preferences = "my_shared_preferences";
     public static final String session_status = "session_status";
 
@@ -80,7 +81,8 @@ public class Login extends AppCompatActivity {
         session = sharedpreferences.getBoolean(session_status, false);
         id = sharedpreferences.getString(TAG_ID, null);
         username = sharedpreferences.getString(TAG_USERNAME, null);
-        saldo = sharedpreferences.getString(TAG_USERNAME, null);
+        saldo = sharedpreferences.getString(TAG_SALDO, null);
+        nama = sharedpreferences.getString(TAG_NAMA, null);
 
         if (session) {
             Intent intent = new Intent(Login.this, MainActivity.class);
@@ -147,6 +149,7 @@ public class Login extends AppCompatActivity {
                         String username = jObj.getString(TAG_USERNAME);
                         String id = jObj.getString(TAG_ID);
                         String saldo = jObj.getString(TAG_SALDO);
+                        String nama = jObj.getString(TAG_NAMA);
 
                         Log.e("Successfully Login!", jObj.toString());
 
@@ -158,6 +161,7 @@ public class Login extends AppCompatActivity {
                         editor.putString(TAG_ID, id);
                         editor.putString(TAG_USERNAME, username);
                         editor.putString(TAG_SALDO, saldo);
+                        editor.putString(TAG_NAMA, nama);
                         editor.commit();
 
                         // Memanggil main activity
@@ -165,6 +169,7 @@ public class Login extends AppCompatActivity {
                         intent.putExtra(TAG_ID, id);
                         intent.putExtra(TAG_USERNAME, username);
                         intent.putExtra(TAG_SALDO, saldo);
+                        intent.putExtra(TAG_NAMA, nama);
                         finish();
                         startActivity(intent);
                     } else {
@@ -204,7 +209,8 @@ public class Login extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+        AppController appController = new AppController();
+        appController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
 
     private void showDialog() {

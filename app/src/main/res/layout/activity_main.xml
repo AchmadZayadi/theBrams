@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:fontFamily="@font/mo_re"
-            android:text="Ilham"
+            android:text="Bramantyo "
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:layout_toRightOf="@id/user_photo"
