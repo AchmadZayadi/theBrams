@@ -67,7 +67,7 @@ public class Adapter extends BaseAdapter {
 
             convertView.setTag(holder);
         }else {
-            // the getTag returns the viewHolder object set as a tag to the view
+            // the getTag returns the viewHolder object set as a tag to the viewaaaaaaa
             holder = (ViewHolder)convertView.getTag();
         }
 
