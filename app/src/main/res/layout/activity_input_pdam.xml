@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgColor"
+    android:background="@color/white"
     tools:context=".Activity.Listrik.InputTokenListrik">
 
     <TextView
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/etIdPelanggan"
+                android:id="@+id/etIdPelPam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contoh 112233445566"/>
@@ -54,33 +54,31 @@
                 android:layout_width="30sp"
                 android:layout_height="30sp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_listrik"/>
+                android:src="@drawable/faucet"/>
         </RelativeLayout>
-
-
-
-
-
-
         <RelativeLayout
-            android:id="@+id/btnPost"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#2db300"
-            android:layout_marginTop="30sp"
-            android:layout_alignParentBottom="true">
-
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/ettagihanpam"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="LANJUT"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:layout_centerInParent="true"/>
-
+                android:hint="Masukan nominal tagihan"/>
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/pay"/>
         </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_submitpam"
+            android:layout_marginTop="30dp"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="Submit"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -25,6 +25,7 @@
         <activity android:name=".Activity.Listrik.InputTokenListrik" />
         <activity android:name=".Activity.Listrik.MenuListrik" />
         <activity android:name=".Activity.Pulsa.InputPulsa" />
+        <activity android:name=".Activity.History.List_transaction" />
         <activity android:name=".Activity.Pulsa.ChooseProvider" />
         <activity android:name=".Activity.Splashscreen">
             <intent-filter>

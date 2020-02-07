@@ -1,116 +1,155 @@
 package com.example.mycollegeapp.Activity.History;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
+import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.mycollegeapp.Activity.Listrik.InputTagihanListrik;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mycollegeapp.Activity.adapter.Adapter;
-import com.example.mycollegeapp.Activity.helper.DbHelper;
-import com.example.mycollegeapp.Activity.model.Data;
+import com.example.mycollegeapp.Activity.adapter.DataModel;
 import com.example.mycollegeapp.R;
+import com.example.mycollegeapp.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class List_transaction extends AppCompatActivity {
 
-    ListView listView;
-    AlertDialog.Builder dialog;
-    List<Data> itemList = new ArrayList<Data>();
-    Adapter adapter;
-    DbHelper SQLite = new DbHelper(this);
-
-    public static final String TAG_ID = "id";
-    public static final String TAG_NAME = "name";
-    public static final String TAG_ADDRESS = "address";
+    private String url = Server.URL + "data_transaksi.php";
+    private static ProgressDialog mProgressDialog;
+    private ListView listView;
+    ArrayList<DataModel> dataModelArrayList;
+    private Adapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.list_item_adapter);
 
-        SQLite = new DbHelper(getApplicationContext());
+        listView = findViewById(R.id.lv);
 
-        adapter = new Adapter(List_transaction.this, itemList);
-        listView.setAdapter(adapter);
+        retrieveJSON();
 
-        // long press listview to show edit and delete
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+    }
 
-            @Override
-            public boolean onItemLongClick(final AdapterView<?> parent, View view,
-                                           final int position, long id) {
-                // TODO Auto-generated method stub
-                final String idx = itemList.get(position).getId();
-                final String name = itemList.get(position).getName();
-                final String address = itemList.get(position).getAddress();
+    private void retrieveJSON() {
 
-                final CharSequence[] dialogitem = {"Edit", "Delete"};
-                dialog = new AlertDialog.Builder(List_transaction.this);
-                dialog.setCancelable(true);
-                dialog.setItems(dialogitem, new DialogInterface.OnClickListener() {
+        showSimpleProgressDialog(this, "Loading...","Data Transaksi",false);
 
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    String result = "";
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        switch (which) {
-                            case 0:
-                                Intent intent = new Intent(List_transaction.this, InputTagihanListrik.class);
-                                intent.putExtra(TAG_ID, idx);
-                                intent.putExtra(TAG_NAME, name);
-                                intent.putExtra(TAG_ADDRESS, address);
-                                startActivity(intent);
-                                break;
-                            case 1:
-                                SQLite.delete(Integer.parseInt(idx));
-                                itemList.clear();
-                                getAllData();
-                                break;
+                    public void onResponse(String response) {
+
+                        Log.d("strrrrr", ">>" + response);
+
+                        try {
+
+                            JSONObject obj = new JSONObject(response);
+                            if(obj.optString("status").equals("true")){
+
+                                dataModelArrayList = new ArrayList<>();
+                                JSONArray dataArray  = obj.getJSONArray("data");
+
+                                for (int i = 0; i < dataArray.length(); i++) {
+
+                                    DataModel playerModel = new DataModel();
+                                    JSONObject dataobj = dataArray.getJSONObject(i);
+
+                                    playerModel.setId_trans(dataobj.getString("id_transaksi"));
+                                    playerModel.setId_cus(dataobj.getString("id_user"));
+                                    playerModel.setHarga(dataobj.getDouble("total_harga"));
+                                    playerModel.setStatus(dataobj.getString("status"));
+                                    playerModel.setKeterangan(dataobj.getString("keterangan"));
+
+                                    dataModelArrayList.add(playerModel);
+
+                                }
+
+                                setupListview();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
-                }).show();
-                return false;
-            }
-        });
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //displaying the error in toast if occurrs
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-        getAllData();
+        // request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        requestQueue.add(stringRequest);
+
 
     }
 
-    private void getAllData() {
-        ArrayList<HashMap<String, String>> row = SQLite.getAllData();
+    private void setupListview(){
+        removeSimpleProgressDialog();  //will remove progress dialog
+        listAdapter = new Adapter(this, dataModelArrayList);
+        listView.setAdapter(listAdapter);
+    }
 
-        for (int i = 0; i < row.size(); i++) {
-            String id = row.get(i).get(TAG_ID);
-            String poster = row.get(i).get(TAG_NAME);
-            String title = row.get(i).get(TAG_ADDRESS);
+    public static void removeSimpleProgressDialog() {
+        try {
+            if (mProgressDialog != null) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+            }
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
 
-            Data data = new Data();
-
-            data.setId(id);
-            data.setName(poster);
-            data.setAddress(title);
-
-            itemList.add(data);
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        adapter.notifyDataSetChanged();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        itemList.clear();
-        getAllData();
+    public static void showSimpleProgressDialog(Context context, String title,
+                                                String msg, boolean isCancelable) {
+        try {
+            if (mProgressDialog == null) {
+                mProgressDialog = ProgressDialog.show(context, title, msg);
+                mProgressDialog.setCancelable(isCancelable);
+            }
+
+            if (!mProgressDialog.isShowing()) {
+                mProgressDialog.show();
+            }
+
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }
+
+

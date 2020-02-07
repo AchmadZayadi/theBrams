@@ -1,67 +1,90 @@
 package com.example.mycollegeapp.Activity.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mycollegeapp.R;
-import com.example.mycollegeapp.Activity.model.Data;
 
-import java.util.List;
-
-/**
- * Created by Kuncoro on 22/12/2016.
- */
+import java.util.ArrayList;
 
 public class Adapter extends BaseAdapter {
-    private Activity activity;
-    private LayoutInflater inflater;
-    private List<Data> items;
 
-    public Adapter(Activity activity, List<Data> items) {
-        this.activity = activity;
-        this.items = items;
+    private Context context;
+    private ArrayList<DataModel> dataModelArrayList;
+
+    public Adapter(Context context, ArrayList<DataModel> dataModelArrayList) {
+
+        this.context = context;
+        this.dataModelArrayList = dataModelArrayList;
     }
 
     @Override
-    public int getCount() {
-        return items.size();
+    public int getViewTypeCount() {
+        return getCount();
     }
-
     @Override
-    public Object getItem(int location) {
-        return items.get(location);
-    }
+    public int getItemViewType(int position) {
 
-    @Override
-    public long getItemId(int position) {
         return position;
     }
 
     @Override
+    public int getCount() {
+        return dataModelArrayList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return dataModelArrayList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
 
-        if (inflater == null)
-            inflater = (LayoutInflater) activity
+        if (convertView == null) {
+            holder = new ViewHolder();
+            LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.list_row, null, true);
 
-        if (convertView == null)
-            convertView = inflater.inflate(R.layout.list_row, null);
+            holder.iv = (ImageView) convertView.findViewById(R.id.iv);
+            holder.tvidtrans = (TextView) convertView.findViewById(R.id.id_trans);
+            holder.tvidcus = (TextView) convertView.findViewById(R.id.id_cus);
+            holder.tvharga = (TextView) convertView.findViewById(R.id.harga);
+            holder.tvstatus = (TextView) convertView.findViewById(R.id.status);
+            holder.tvket = (TextView) convertView.findViewById(R.id.ket);
 
-        TextView id = (TextView) convertView.findViewById(R.id.id);
-        TextView name = (TextView) convertView.findViewById(R.id.name);
-        TextView address = (TextView) convertView.findViewById(R.id.address);
+            convertView.setTag(holder);
+        }else {
+            // the getTag returns the viewHolder object set as a tag to the view
+            holder = (ViewHolder)convertView.getTag();
+        }
 
-        Data data = items.get(position);
 
-        id.setText(data.getId());
-        name.setText(data.getName());
-        address.setText(data.getAddress());
+        holder.tvidtrans.setText("ID Transaksi "+dataModelArrayList.get(position).getId_trans());
+        holder.tvidcus.setText("Nomor Transaksi: "+dataModelArrayList.get(position).getId_cus());
+        holder.tvharga.setText("Harga: "+dataModelArrayList.get(position).getHarga());
+        holder.tvstatus.setText("status: "+dataModelArrayList.get(position).getStatus());
+        holder.tvket.setText("keterangan: "+dataModelArrayList.get(position).getKeterangan());
 
         return convertView;
     }
+
+    private class ViewHolder {
+
+        protected TextView tvidtrans, tvidcus, tvharga,tvstatus, tvket ;
+        protected ImageView iv;
+    }
+
 }

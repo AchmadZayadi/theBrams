@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,6 +40,7 @@ public class InputTokenListrik extends AppCompatActivity {
     String id;
     ProgressDialog pDialog;
     EditText txt_id;
+    TextView txt_harga;
     Button btn_submit, btn_cancel;
     Intent intent;
     SharedPreferences sharedpreferences;
@@ -90,7 +92,7 @@ public class InputTokenListrik extends AppCompatActivity {
         btn_cancel =  findViewById(R.id.btn_cancel_tok);
         btn_submit =  findViewById(R.id.btn_bayar_tok);
         txt_id =  findViewById(R.id.etIdPelanggan);
-       // txt_harga =  findViewById(R.id.etharga);
+        txt_harga =  findViewById(R.id.txhargatoken);
 
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
