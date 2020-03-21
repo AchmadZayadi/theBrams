@@ -7,6 +7,15 @@ public class DataModel {
     private Double harga;
     private String status;
     private String keterangan;
+    private String saldo;
+
+    public String getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(String saldo) {
+        this.saldo = saldo;
+    }
 
     public String getId_trans() {
         return id_trans;

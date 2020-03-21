@@ -44,6 +44,7 @@ public class Login extends AppCompatActivity {
 
     public final static String TAG_USERNAME = "username";
     public final static String TAG_ID = "id";
+    public final static String TAG_ID_WALL = "id_wallet";
     public final static String TAG_SALDO = "saldo";
     public final static String TAG_NAMA = "nama";
 
@@ -51,7 +52,7 @@ public class Login extends AppCompatActivity {
 
     SharedPreferences sharedpreferences;
     Boolean session = false;
-    String id, username, saldo, nama;
+    String id, username, saldo, nama, id_wall;
     public static final String my_shared_preferences = "my_shared_preferences";
     public static final String session_status = "session_status";
 
@@ -83,6 +84,7 @@ public class Login extends AppCompatActivity {
         username = sharedpreferences.getString(TAG_USERNAME, null);
         saldo = sharedpreferences.getString(TAG_SALDO, null);
         nama = sharedpreferences.getString(TAG_NAMA, null);
+        id_wall = sharedpreferences.getString(TAG_ID_WALL, null);
 
         if (session) {
             Intent intent = new Intent(Login.this, MainActivity.class);
@@ -150,6 +152,7 @@ public class Login extends AppCompatActivity {
                         String id = jObj.getString(TAG_ID);
                         String saldo = jObj.getString(TAG_SALDO);
                         String nama = jObj.getString(TAG_NAMA);
+                        String id_wall = jObj.getString(TAG_ID_WALL);
 
                         Log.e("Successfully Login!", jObj.toString());
 
@@ -162,6 +165,7 @@ public class Login extends AppCompatActivity {
                         editor.putString(TAG_USERNAME, username);
                         editor.putString(TAG_SALDO, saldo);
                         editor.putString(TAG_NAMA, nama);
+                        editor.putString(TAG_ID_WALL, id_wall);
                         editor.commit();
 
                         // Memanggil main activity

@@ -28,7 +28,7 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
         ViewHolder holder = null;
 
         if (convertView == null) {
-            convertView		=  mInflater.inflate(R.layout.list_item_adapter, null);
+            convertView		=  mInflater.inflate(R.layout.list_item, null);
 
             holder 			= new ViewHolder();
             holder.titleTv	= convertView.findViewById(R.id.tv_title);

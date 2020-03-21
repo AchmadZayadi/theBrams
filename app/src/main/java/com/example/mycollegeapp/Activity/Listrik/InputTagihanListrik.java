@@ -76,6 +76,7 @@ public class InputTagihanListrik extends AppCompatActivity {
         txt_name = (EditText) findViewById(R.id.etnama_pel);
         txt_harga = (EditText) findViewById(R.id.etharga);
 
+
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
 
         id = getIntent().getStringExtra(TAG_ID);

@@ -39,16 +39,16 @@ public class InputTokenListrik extends AppCompatActivity {
     public static final String TAG_ID = "id";
     String id;
     ProgressDialog pDialog;
-    EditText txt_id;
+    EditText txt_id,id_cus,etid_wall;
     TextView txt_harga;
     Button btn_submit, btn_cancel;
     Intent intent;
     SharedPreferences sharedpreferences;
     String [] NominalPulsa = {
-            "10.000",
-            "25.000",
-            "50.000",
-            "100.000"
+            "10000",
+            "25000",
+            "50000",
+            "100000"
     };
 
     int success;
@@ -92,7 +92,10 @@ public class InputTokenListrik extends AppCompatActivity {
         btn_cancel =  findViewById(R.id.btn_cancel_tok);
         btn_submit =  findViewById(R.id.btn_bayar_tok);
         txt_id =  findViewById(R.id.etIdPelanggan);
-        txt_harga =  findViewById(R.id.txhargatoken);
+        txt_harga =  findViewById(R.id.tvTotalharga);
+        id_cus =  findViewById(R.id.etIdPel);
+        etid_wall =  findViewById(R.id.etIdwall);
+
 
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +113,14 @@ public class InputTokenListrik extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String id_pel = txt_id.getText().toString();
+                String id_pel = id_cus.getText().toString();
+                String id_wall = etid_wall.getText().toString();
+                String nomer_pel = txt_id.getText().toString();
+                String tagihan = txt_harga.getText().toString();
+
+                sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+                id_cus.setText(sharedpreferences.getString("id",""));
+                etid_wall.setText(sharedpreferences.getString("id_wallet",""));
 
               //  String tagihan = txt_harga.getText().toString();
 
@@ -118,7 +128,7 @@ public class InputTokenListrik extends AppCompatActivity {
                 if (conMgr.getActiveNetworkInfo() != null
                         && conMgr.getActiveNetworkInfo().isAvailable()
                         && conMgr.getActiveNetworkInfo().isConnected()) {
-                    checkinput(id_pel, "9000");
+                    checkinput(id_pel, tagihan, id_wall, nomer_pel);
                 } else {
                     Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                 }
@@ -136,7 +146,8 @@ public class InputTokenListrik extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                txt_harga.setText(spinner.getSelectedItem().toString());
+                txt_harga.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -147,7 +158,7 @@ public class InputTokenListrik extends AppCompatActivity {
 
 
     }
-    private void checkinput(final String id_pel, final String tagihan) {
+    private void checkinput(final String id_pel, final String tagihan, final String id_wall, final String nomer_pel) {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Membayar ...");
@@ -171,8 +182,9 @@ public class InputTokenListrik extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(),
                                 jObj.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
-
-
+                        Intent intent = new Intent(InputTokenListrik.this, MainActivity.class);
+                        finish();
+                        startActivity(intent);
                       //  txt_harga.setText("");
 
                     } else {
@@ -204,6 +216,8 @@ public class InputTokenListrik extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_pel", id_pel);
+                params.put("id_cus", nomer_pel);
+                params.put("id_wallet", id_wall);
                 params.put("tagihan", tagihan);
 
 

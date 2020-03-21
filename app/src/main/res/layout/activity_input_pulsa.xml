@@ -49,6 +49,24 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/etIdPel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/etPhoneNumber"
+                    android:inputType="number"
+                    android:visibility="gone"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+                <EditText
+                    android:id="@+id/etIdwall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/etPhoneNumber"
+                    android:inputType="number"
+                    android:visibility="gone"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/etPhoneNumber"
@@ -144,7 +162,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Saldo Anda"
+                    android:text="Pastikan Saldo Anda cukup"
                     android:textSize="14sp" />
 
                 <TextView

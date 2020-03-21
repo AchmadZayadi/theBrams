@@ -28,6 +28,8 @@ public class ChooseProvider extends AppCompatActivity {
     RelativeLayout rlXl;
     RelativeLayout rlTelkomsel;
     RelativeLayout rlTheree;
+    RelativeLayout rlaxis;
+    RelativeLayout rlsmart;
 
     Toolbar toolbar;
     @Override
@@ -54,6 +56,8 @@ public class ChooseProvider extends AppCompatActivity {
         rlTelkomsel = findViewById(R.id.rlTelkomsel);
         rlTheree = findViewById(R.id.rlTheree);
         rlXl = findViewById(R.id.rlXl);
+        rlsmart = findViewById(R.id.rlsmart);
+        rlaxis = findViewById(R.id.rlaxis);
 
         rlXl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +85,19 @@ public class ChooseProvider extends AppCompatActivity {
             }
         });
         rlIndosat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseProvider.this, InputPulsa.class);
+                startActivity(intent);
+            }
+        });
+        rlaxis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChooseProvider.this, InputPulsa.class);
+                startActivity(intent);
+            }
+        });rlsmart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChooseProvider.this, InputPulsa.class);

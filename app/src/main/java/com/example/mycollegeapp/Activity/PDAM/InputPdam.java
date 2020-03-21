@@ -2,6 +2,8 @@ package com.example.mycollegeapp.Activity.PDAM;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.mycollegeapp.Activity.AppController;
+import com.example.mycollegeapp.Activity.Listrik.InputTokenListrik;
+import com.example.mycollegeapp.Login;
+import com.example.mycollegeapp.MainActivity;
 import com.example.mycollegeapp.R;
 import com.example.mycollegeapp.Register;
 import com.example.mycollegeapp.Server;
@@ -36,14 +41,14 @@ public class InputPdam extends AppCompatActivity {
 
     public static final String TAG_SALDO = "saldo";
     public static final String TAG_USERNAME = "username";
-
+    SharedPreferences sharedpreferences;
     int success;
 
     private static final String TAG = Register.class.getSimpleName();
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
 
-    EditText etidpel, ettagihan;
+    EditText etidpel, ettagihan,etId, etIdwall;
 
     ConnectivityManager conMgr;
 
@@ -102,27 +107,35 @@ public class InputPdam extends AppCompatActivity {
 
         Button btn_submit = (Button) findViewById(R.id.btn_submitpam);
         etidpel = findViewById(R.id.etIdPelPam);
+        etIdwall = findViewById(R.id.etIdwall);
+        etId = findViewById(R.id.etIdPel);
         ettagihan = findViewById(R.id.ettagihanpam);
+        sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
+        etId.setText(sharedpreferences.getString("id",""));
+        etIdwall.setText(sharedpreferences.getString("id_wallet",""));
+
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                String id_pel = etidpel.getText().toString();
+                String id_pel = etId.getText().toString();
+                String id_wall = etIdwall.getText().toString();
+                String id_cus = etidpel.getText().toString();
                 String total_harga = ettagihan.getText().toString();
 
 
                 if (conMgr.getActiveNetworkInfo() != null
                         && conMgr.getActiveNetworkInfo().isAvailable()
                         && conMgr.getActiveNetworkInfo().isConnected()) {
-                    checkinput(id_pel, total_harga);
+                    checkinput(id_pel, total_harga, id_cus, id_wall);
                 } else {
                     Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-    private void checkinput(final String telepon,final String total_harga) {
+    private void checkinput(final String telepon, final String total_harga, final String id_cus, final String id_wall) {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Membayar ...");
@@ -149,6 +162,9 @@ public class InputPdam extends AppCompatActivity {
 
                         etidpel.setText("");
                         ettagihan.setText("");
+                        Intent intent = new Intent(InputPdam.this, MainActivity.class);
+                        finish();
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(getApplicationContext(),
@@ -179,6 +195,8 @@ public class InputPdam extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_pel", telepon);
+                params.put("id_wallet", id_wall);
+                params.put("id_cus", id_cus);
                 params.put("tagihan", total_harga);
 
                 return params;

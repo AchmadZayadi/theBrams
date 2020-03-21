@@ -8,6 +8,7 @@
 
     <application
         android:name=".Activity.AppController"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,6 +21,8 @@
             android:name=".Login" >
         </activity>
         <activity android:name=".MainActivity" />
+        <activity android:name=".Activity.TopUp" />
+        <activity android:name=".Activity.Profile_user" />
         <activity android:name=".Activity.PDAM.InputPdam" />
         <activity android:name=".Activity.Listrik.InputTagihanListrik" />
         <activity android:name=".Activity.Listrik.InputTokenListrik" />

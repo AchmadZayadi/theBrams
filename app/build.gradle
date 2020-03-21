@@ -40,4 +40,5 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0' /*tambahan volley library*/
     implementation 'android.arch.work:work-runtime:1.0.1'/*tambahan volley library*/
     implementation 'com.squareup.picasso:picasso:2.71828'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
